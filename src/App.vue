@@ -16,16 +16,19 @@
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col"></th>
-                            <th scope="col" class="flex"><span>Nombre</span><img src="/assets/filter.svg" alt="filter" />
+                            <th scope="col p-4"></th>
+                            <th scope="col" class="bg-no-repeat bg-right p-4"
+                                style="background-image: url('/assets/filter.svg')"><span>Nombre</span>
                             </th>
-                            <th scope="col" class="bg-no-repeat bg-right" style="background-image('/assets/filter.svg')"
-                                @click="order('employee_age')">
+                            <th scope="col" class="bg-no-repeat bg-right p-4"
+                                style="background-image: url('/assets/filter.svg')" @click="order('employee_age')">
                                 <span>Edad</span>
                             </th>
-                            <th scope="col" @click="order('employee_salary')"><span>Salario</span><img
-                                    src="/assets/filter.svg" alt="filter"></th>
-                            <th scope="col"></th>
+                            <th scope="col" class="bg-no-repeat bg-right p-4"
+                                style="background-image: url('/assets/filter.svg')" @click="order('employee_salary')">
+                                <span>Salario</span>
+                            </th>
+                            <th scope="col p-4"></th>
                         </tr>
                     </thead>
                     <tbody>
