@@ -2,7 +2,7 @@
   <form class="w-full max-w-lg" @submit.prevent="getFormData">
     <span v-for="error in errors">{{ error }}</span>
     <div class="flex flex-wrap -mx-3 mb-6">
-      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <div class="w-full px-3 mb-6 md:mb-0">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
           Nombre (s)*
         </label>
@@ -39,7 +39,7 @@
           id="grid-first-name" type="number" placeholder="Edad" min="18" v-model="newDataEmployee.age">
         <p v-if="errors.age" class="text-red-500 text-xs italic">Por favor llene el campo.</p>
       </div>
-      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <div class="w-full px-3 mb-6 md:mb-0">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
           Salario*
         </label>
