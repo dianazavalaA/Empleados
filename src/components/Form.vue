@@ -11,7 +11,7 @@
           name="name" id="grid-first-name" type="text" placeholder="Nombre" v-model="newDataEmployee.name">
         <p v-if="errors.name" class="text-red-500 text-xs italic">Por favor llene el campo.</p>
       </div>
-      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <div class="w-full px-3 mb-6 md:mb-0">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
           Apellido paterno*
         </label>
@@ -20,7 +20,7 @@
           id="grid-first-name" type="text" placeholder="Apellido paterno" v-model="newDataEmployee.firstLastname">
         <p v-if="errors.firstLastname" class="text-red-500 text-xs italic">Por favor llene el campo.</p>
       </div>
-      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <div class="w-full px-3 mb-6 md:mb-0">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
           Apellido materno*
         </label>
@@ -30,7 +30,7 @@
           v-model="newDataEmployee.secondLastname">
         <p v-if="errors.secondLastname" class="text-red-500 text-xs italic">Por favor llene el campo.</p>
       </div>
-      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <div class="w-full px-3 mb-6 md:mb-0">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
           Edad*
         </label>
