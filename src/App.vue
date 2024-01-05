@@ -5,9 +5,12 @@
             <div class="flex-col">
                 <h2 class="border-b-2 border-blue-500 pb-2 mb-2 max-width">Colaboradores</h2>
                 <div class="my-8 flex items-center justify-between">
-                    <input style="background-image: url('/assets/search.svg')"
-                        class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-no-repeat"
-                        id="Search" type="text" v-model="search" placeholder="Buscar por nombre">
+                    <div class="relative">
+                        <div class="absolute inset-y-0 flex items-center pl-3"><img src="/assets/search.svg"></div>
+                        <input
+                            class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-no-repeat bg-left bg-origin-content pl-10"
+                            id="Search" type="text" v-model="search" placeholder="Buscar por nombre">
+                    </div>
                     <button
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
                         @click="showModal">Crear colaborador</button>
