@@ -1,66 +1,68 @@
 <template>
-  <form class="w-full max-w-lg" @submit.prevent="getFormData">
+  <form class="w-full max-w-md" @submit.prevent="getFormData">
     <span v-for="error in errors">{{ error }}</span>
-    <div class="flex flex-wrap -mx-3 mb-6">
-      <validation-provider name="name" rules="required" v-slot="{ invalid, errors }">
+    <div class="flex flex-col -mx-3 mb-6">
+      <h2 class="block tracking-wide text-gray-700 text-xl font-bold mb-6 px-3">Crear colaboradores</h2>
+      <validation-provider name="name" rules="required" v-slot="{ invalid, errors, validated }">
         <div class="w-full px-3 mb-6 md:mb-0">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-            Nombre (s)*
+          <label class="block tracking-wide text-gray-700 text-xg mb-2" for="grid-first-name">
+            Nombre (s) <span class="text-red-500">*</span>
           </label>
-          <input v-bind:class="{ 'border-red-500': invalid }"
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            name="name" id="grid-first-name" type="text" placeholder="Nombre" v-model="newDataEmployee.name">
+          <input v-bind:class="{ 'border-red-500': validated && invalid }"
+            class="appearance-none block w-full bg-white-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            name="name" id="grid-first-name" type="text" placeholder="Solo nombre(s)" v-model="newDataEmployee.name">
           <p v-for="error in errors" class="text-red-500 text-xs italic">{{ error }}</p>
         </div>
       </validation-provider>
 
-      <validation-provider name="firstLastname" rules="required" v-slot="{ invalid, errors }">
+      <validation-provider name="firstLastname" rules="required" v-slot="{ invalid, errors, validated }">
         <div class="w-full px-3 mb-6 md:mb-0">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-            Apellido paterno*
+          <label class="block tracking-wide text-gray-700 text-xg mb-2" for="grid-first-name">
+            Apellido paterno <span class="text-red-500">*</span>
           </label>
-          <input v-bind:class="{ 'border-red-500': invalid }" name="firstLastname"
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="grid-first-name" type="text" placeholder="Apellido paterno" v-model="newDataEmployee.firstLastname">
-          <p v-for="error in errors" class="text-red-500 text-xs italic">{{ error }}</p>
+          <input v-bind:class="{ 'border-red-500': validated && invalid }" name="firstLastname"
+            class="appearance-none block w-full bg-white-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            id="grid-first-name" type="text" placeholder="Ingresa el primer apellido"
+            v-model="newDataEmployee.firstLastname">
+          <p v-for="error in errors" class="text-red-500 text-xg italic">{{ error }}</p>
         </div>
       </validation-provider>
 
 
-      <validation-provider name="secondLastname" rules="required" v-slot="{ invalid, errors }">
+      <validation-provider name="secondLastname" rules="required" v-slot="{ invalid, errors, validated }">
         <div class="w-full px-3 mb-6 md:mb-0">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-            Apellido materno*
+          <label class="block tracking-wide text-gray-700 text-xg mb-2" for="grid-first-name">
+            Apellido materno <span class="text-red-500">*</span>
           </label>
-          <input v-bind:class="{ 'border-red-500': invalid }" name="secondLastname"
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="grid-first-name" type="text" min="18" placeholder="Apellido materno"
+          <input v-bind:class="{ 'border-red-500': validated && invalid }" name="secondLastname"
+            class="appearance-none block w-full bg-white-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            id="grid-first-name" type="text" min="18" placeholder="Ingresa segundo apellido"
             v-model="newDataEmployee.secondLastname">
           <p v-for="error in errors" class="text-red-500 text-xs italic">{{ error }}</p>
         </div>
       </validation-provider>
 
 
-      <validation-provider name="age" rules="minmax:18,70" v-slot="{ invalid, errors }">
+      <validation-provider name="age" rules="minmax:18,70|integer" v-slot="{ invalid, errors, visited }">
         <div class="w-full px-3 mb-6 md:mb-0">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-            Edad*
+          <label class="block tracking-wide text-gray-700 text-xg mb-2" for="grid-first-name">
+            Edad <span class="text-red-500">*</span>
           </label>
-          <input v-bind:class="{ 'border-red-500': invalid }" name="age"
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="grid-first-name" type="number" placeholder="Edad" min="18" v-model="newDataEmployee.age">
+          <input v-bind:class="{ 'border-red-500': visited && invalid }" name="age"
+            class="appearance-none block w-full bg-white-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            id="grid-first-name" type="number" placeholder="Ingresa la edad" min="18" v-model="newDataEmployee.age">
           <p v-for="error in errors" class="text-red-500 text-xs italic">{{ error }}</p>
         </div>
       </validation-provider>
 
-      <validation-provider name="salary" rules="required" v-slot="{ invalid, errors }">
+      <validation-provider name="salary" rules="required" v-slot="{ invalid, errors, validated }">
         <div class="w-full px-3 mb-6 md:mb-0">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-            Salario*
+          <label class="block tracking-wide text-gray-700 text-xg mb-2" for="grid-first-name">
+            Salario <span class="text-red-500">*</span>
           </label>
-          <input v-bind:class="{ 'border-red-500': invalid }" name="salary"
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="grid-first-name" type="number" placeholder="Salario" v-model="newDataEmployee.salary">
+          <input v-bind:class="{ 'border-red-500': validated && invalid }" name="salary"
+            class="appearance-none block w-full bg-white-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            id="grid-first-name" type="number" placeholder="Ingresa el salario" v-model="newDataEmployee.salary">
           <p v-for="error in errors" class="text-red-500 text-xs italic">{{ error }}</p>
         </div>
       </validation-provider>
