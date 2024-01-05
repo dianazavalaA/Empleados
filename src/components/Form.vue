@@ -1,5 +1,5 @@
 <template>
-  <validation-observer>
+  <validation-observer v-slot="{ invalid }">
     <form class="w-full max-w-md" @submit.prevent="getFormData">
       <span v-for="error in errors">{{ error }}</span>
       <div class="flex flex-col -mx-3 mb-6">
@@ -44,14 +44,14 @@
         </validation-provider>
 
 
-        <validation-provider name="age" rules="minmax:18,70|integer" v-slot="{ invalid, errors, visited }">
+        <validation-provider name="age" rules="required|minmax:18,70|integer" v-slot="{ invalid, errors, visited }">
           <div class="w-full px-3 mb-6 md:mb-0">
             <label class="block tracking-wide text-gray-700 text-xg mb-2" for="grid-first-name">
               Edad <span class="text-red-500">*</span>
             </label>
             <input v-bind:class="{ 'border-red-500': visited && invalid }" name="age"
               class="appearance-none block w-full bg-white-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-              id="grid-first-name" type="number" placeholder="Ingresa la edad" min="18" v-model="newDataEmployee.age">
+              id="grid-first-name" type="number" placeholder="Ingresa la edad" v-model="newDataEmployee.age">
             <p v-for="error in errors" class="text-red-500 text-xs italic">{{ error }}</p>
           </div>
         </validation-provider>
@@ -72,7 +72,8 @@
         <button
           class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
           @click='$emit("close")' type="button">Cancelar</button>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+        <button :class="{ 'cursor-not-allowed opacity-75': invalid }"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
           type="submit">Crear colaborador</button>
       </div>
     </form>
@@ -82,12 +83,17 @@
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import { extend } from 'vee-validate';
-import { required, integer, min } from 'vee-validate/dist/rules';
+import { required, integer } from 'vee-validate/dist/rules';
 
 
 extend('required', {
   ...required,
   message: 'Se requiere llenar este campo'
+});
+
+extend('integer', {
+  ...integer,
+  message: 'Se requiere un número entero'
 });
 
 extend('minmax', {
