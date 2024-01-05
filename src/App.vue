@@ -1,12 +1,17 @@
 <template>
     <div class="min-w-screen min-h-screen flex justify-center">
         <div class="container mx-auto">
-            <h1 class="text-2xl">Listado de Colaboradores</h1>
+            <div class="px-2">
+                <h1 class="text-2xl">Listado de Colaboradores</h1>
+            </div>
             <div class="flex-col">
-                <h2 class="border-b-2 border-blue-500 pb-2 mb-2 max-width">Colaboradores</h2>
+                <div class="px-2">
+                    <h2 class="border-b-2 border-blue-500 pb-2 mb-2 max-width">Colaboradores</h2>
+                </div>
                 <div class="my-8 flex items-center justify-between">
                     <div class="relative">
-                        <div class="absolute inset-y-0 flex items-center pl-3"><img src="/assets/search.svg"></div>
+                        <div class="absolute inset-y-0 flex items-center pl-3 pointer-events-none"><img
+                                src="/assets/search.svg"></div>
                         <input
                             class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-no-repeat bg-left bg-origin-content pl-10"
                             id="Search" type="text" v-model="search" placeholder="Buscar por nombre">
@@ -18,7 +23,7 @@
 
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
+                        <tr class="border-b-2 border-gray-300 pb-2 mb-2 max-width">
                             <th scope="col p-4"></th>
                             <th scope="col" class="bg-no-repeat bg-right p-4"
                                 style="background-image: url('/assets/filter.svg')"><span>Nombre</span>
