@@ -3,7 +3,12 @@
     <form class="w-full max-w-md" @submit.prevent="getFormData">
       <span v-for="error in errors">{{ error }}</span>
       <div class="flex flex-col -mx-3 mb-6">
-        <h2 class="block tracking-wide text-gray-700 text-xl font-bold mb-6 px-3">Crear colaboradores</h2>
+        <div class="relative">
+          <h2 class="block tracking-wide text-gray-700 text-xl font-bold mb-6 px-3">Crear colaboradores</h2>
+          <button class="absolute right-0 top-0" @click='$emit("close")' type="button"><img
+              src="/assets/closeSmall.svg" /></button>
+        </div>
+
         <validation-provider name="name" rules="required" v-slot="{ invalid, errors, validated }">
           <div class="w-full px-3 mb-6 md:mb-0">
             <label class="block tracking-wide text-gray-700 text-xg mb-2" for="grid-first-name">
