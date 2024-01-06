@@ -21,38 +21,45 @@
                         @click="showModal">Crear colaborador</button>
                 </div>
 
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr class="border-b-2 border-gray-300 pb-2 mb-2 max-width">
-                            <th scope="col p-4"></th>
-                            <th scope="col" class="bg-no-repeat bg-right p-4"
-                                style="background-image: url('/assets/filter.svg')"><span>Nombre</span>
-                            </th>
-                            <th scope="col" class="bg-no-repeat bg-right p-4"
-                                style="background-image: url('/assets/filter.svg')" @click="order('employee_age')">
-                                <span>Edad</span>
-                            </th>
-                            <th scope="col" class="bg-no-repeat bg-right p-4"
-                                style="background-image: url('/assets/filter.svg')" @click="order('employee_salary')">
-                                <span>Salario</span>
-                            </th>
-                            <th scope="col p-4"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                            v-for="employee in orderBy">
-                            <td> <input id="checkbox" type="checkbox"
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="checkbox" class="sr-only">checkbox</label>
-                            </td>
-                            <td>{{ employee.employee_name }}</td>
-                            <td>{{ employee.employee_age }}</td>
-                            <td>{{ employee.employee_salary }}</td>
-                            <td><button><img src="/assets/dots.svg" alt="dots" /></button></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="border ring-1 ring-opacity-75 ring-gray-400 rounded-xl overflow-hidden">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto">
+                        <thead class="text-xs text-gray-700o dark:bg-gray-700 dark:text-gray-400">
+                            <tr class="border-b-2 border-gray-300 pb-2 mb-2 max-width">
+                                <th class="px-2 w-10 text-center" scope="col"><input id="checkbox" type="checkbox"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                </th>
+                                <th scope="col" class="bg-no-repeat bg-right p-4"
+                                    style="background-image: url('/assets/filter.svg')"><span>Nombre</span>
+                                </th>
+                                <th scope="col" class="bg-no-repeat bg-right p-4"
+                                    style="background-image: url('/assets/filter.svg')" @click="order('employee_age')">
+                                    <span>Edad</span>
+                                </th>
+                                <th scope="col" class="bg-no-repeat bg-right p-4"
+                                    style="background-image: url('/assets/filter.svg')" @click="order('employee_salary')">
+                                    <span>Salario</span>
+                                </th>
+                                <th class="px-2 w-10 text-center" scope="col p-4"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                                v-for="employee in orderBy">
+                                <td class="px-2 w-10 text-center"> <input id="checkbox" type="checkbox"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 pl-2">
+                                    <label for="checkbox" class="sr-only">checkbox</label>
+                                </td>
+                                <td>{{ employee.employee_name }}</td>
+                                <td>{{ employee.employee_age }}</td>
+                                <td>{{ employee.employee_salary }}</td>
+                                <td class="px-2 w-10 text-center"><button><img src="/assets/dots.svg" alt="dots" /></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
             </div>
         </div>
         <Modal :is-show="isShow">
