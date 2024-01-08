@@ -6,7 +6,8 @@
             </div>
             <div class="flex-col">
                 <div class="px-2 h-10 border-b-2 flex">
-                    <a class="border-b-2 border-blue-500 -mb-[2px] max-width">Colaboradores</a>
+                    <router-link to="#colaboradores"
+                        class="border-b-2 border-blue-500 -mb-[2px] max-width px-2 hover:opacity:75">Colaboradores</router-link>
                 </div>
                 <div class="my-8 flex itms-center justify-between">
                     <div class="relative">
