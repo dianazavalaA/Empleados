@@ -20,14 +20,13 @@
                         <th class="px-2 w-10 text-center" scope="col"><input id="checkbox" type="checkbox"
                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         </th>
-                        <th scope="col" class="bg-no-repeat bg-right p-4 bg-origin-content"
-                            style="background-image: url('/assets/filter.svg')"><span>Nombre</span>
+                        <th scope="col" class="bg-no-repeat bg-right p-4 bg-origin-content"><span>Nombre</span>
                         </th>
-                        <th scope="col" class="bg-no-repeat bg-right p-4 bg-origin-content"
+                        <th scope="col" class="bg-no-repeat bg-right p-4 bg-origin-content w-48"
                             style="background-image: url('/assets/filter.svg')" @click="order('employee_age')">
                             <span>Edad</span>
                         </th>
-                        <th scope="col" class="bg-no-repeat bg-right p-4 bg-origin-content"
+                        <th scope="col" class="bg-no-repeat bg-right p-4 bg-origin-content w-48"
                             style="background-image: url('/assets/filter.svg')" @click="order('employee_salary')">
                             <span>Salario</span>
                         </th>
@@ -41,15 +40,18 @@
                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 pl-2">
                             <label for="checkbox" class="sr-only">checkbox</label>
                         </td>
-                        <td class="py-2">{{ employee.employee_name }}</td>
-                        <td class="py-2">{{ employee.employee_age }}</td>
-                        <td class="py-2">{{ employee.employee_salary }}</td>
+                        <td class="px-4">{{ employee.employee_name }}</td>
+                        <td class="px-4 w-48">{{ employee.employee_age }}</td>
+                        <td class="px-4 w-48">{{ employee.employee_salary }}</td>
                         <td class="px-2 w-10 text-center py-2"><button><img src="/assets/dots.svg" alt="dots" /></button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+        <Modal :is-show="isShow">
+            <Form @close="closeModal" @newEmployee="getdata" />
+        </Modal>
     </div>
 </template>
 
