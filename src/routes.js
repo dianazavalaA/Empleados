@@ -1,5 +1,5 @@
 import VueRouter from 'vue-router';
-import EmployeeList from './components/EmployeeList'
+import EmployeeList from './components/EmployeeList.vue'
 
 const routes = [{ path: '/', component: EmployeeList  }]
 

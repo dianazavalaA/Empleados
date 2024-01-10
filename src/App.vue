@@ -9,6 +9,7 @@
                     <router-link to="#colaboradores"
                         class="border-b-2 border-blue-500 -mb-[2px] max-width px-2 hover:opacity:75">Colaboradores</router-link>
                 </div>
+                <router-view></router-view>
             </div>
         </div>
         <Modal :is-show="isShow">
@@ -20,6 +21,7 @@
 <script>
 import Modal from './components/Modal.vue'
 import Form from './components/Form.vue'
+
 export default {
     data() {
         return {
