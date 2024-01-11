@@ -139,7 +139,7 @@ export default {
       const newEmployee = Object.fromEntries(new FormData(ev.target).entries())
       console.log(newEmployee, new FormData(ev.target))
       if (newEmployee?.name?.length > 0 && newEmployee?.firstLastname?.length > 0 && newEmployee?.secondLastname?.length > 0 && newEmployee?.age?.length > 0 && newEmployee?.salary?.length > 0) {
-        this.$emit('newEmployee', { employee_name: `${newEmpaloyee?.name} ${newEmployee?.firstLastname} ${newEmployee?.secondLastname}`, employee_age: newEmployee?.age, employee_salary: newEmployee?.salary })
+        this.$emit('newEmployee', { employee_name: `${newEmployee?.name} ${newEmployee?.firstLastname} ${newEmployee?.secondLastname}`, employee_age: newEmployee?.age, employee_salary: newEmployee?.salary })
       }
       if (newEmployee?.name?.trim() === "") {
         this.errors.push({ name: { message: "Ingresar nombre" } })
