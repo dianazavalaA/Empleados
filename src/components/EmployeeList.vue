@@ -67,7 +67,9 @@ export default {
             isForm: false,
             sortBy: { by: '', option: '' },
             search: "",
-            errors: []
+            errors: [],
+            changeEmployee: [],
+            isShowMod: false
         }
     },
     methods: {
@@ -105,6 +107,12 @@ export default {
         }, remove(id) {
             const employees = this.employees.filter(emp => emp.id !== id)
             this.employees = [...employees]
+        },
+        editEmployee(id) {
+            this.changeEmployee = this.employees.find(emp => emp.id === id)
+            this.isShowMod = true
+
+
         }
     },
     computed: {
