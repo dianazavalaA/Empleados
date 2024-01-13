@@ -16,7 +16,8 @@
             </label>
             <input v-bind:class="{ 'border-red-500': validated && invalid }"
               class="appearance-none block w-full bg-white-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-              name="name" id="grid-first-name" type="text" placeholder="Solo nombre(s)" v-model="newDataEmployee.name">
+              name="firstName" id="grid-first-name" type="text" placeholder="Solo nombre(s)"
+              v-model="newDataEmployee.firstName">
             <p v-for="error in errors" class="text-red-500 text-xs italic">{{ error }}</p>
           </div>
         </validation-provider>
@@ -26,10 +27,10 @@
             <label class="block tracking-wide text-gray-700 text-xg mb-2" for="grid-first-name">
               Apellido paterno <span class="text-red-500">*</span>
             </label>
-            <input v-bind:class="{ 'border-red-500': validated && invalid }" name="firstLastname"
+            <input v-bind:class="{ 'border-red-500': validated && invalid }" name="lastName"
               class="appearance-none block w-full bg-white-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-name" type="text" placeholder="Ingresa el primer apellido"
-              v-model="newDataEmployee.firstLastname">
+              v-model="newDataEmployee.lastName">
             <p v-for="error in errors" class="text-red-500 text-xg italic">{{ error }}</p>
           </div>
         </validation-provider>
@@ -40,10 +41,10 @@
             <label class="block tracking-wide text-gray-700 text-xg mb-2" for="grid-first-name">
               Apellido materno <span class="text-red-500">*</span>
             </label>
-            <input v-bind:class="{ 'border-red-500': validated && invalid }" name="secondLastname"
+            <input v-bind:class="{ 'border-red-500': validated && invalid }" name="maidenName"
               class="appearance-none block w-full bg-white-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-name" type="text" min="18" placeholder="Ingresa segundo apellido"
-              v-model="newDataEmployee.secondLastname">
+              v-model="newDataEmployee.maidenName">
             <p v-for="error in errors" class="text-red-500 text-xs italic">{{ error }}</p>
           </div>
         </validation-provider>
@@ -61,17 +62,30 @@
           </div>
         </validation-provider>
 
-        <validation-provider name="salary" rules="required" v-slot="{ invalid, errors, validated }">
+        <validation-provider name="weight" rules="required" v-slot="{ invalid, errors, validated }">
           <div class="w-full px-3 mb-6 md:mb-0">
             <label class="block tracking-wide text-gray-700 text-xg mb-2" for="grid-first-name">
-              Salario <span class="text-red-500">*</span>
+              Peso <span class="text-red-500">*</span>
             </label>
-            <input v-bind:class="{ 'border-red-500': validated && invalid }" name="salary"
+            <input v-bind:class="{ 'border-red-500': validated && invalid }" name="weight"
               class="appearance-none block w-full bg-white-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-              id="grid-first-name" type="number" placeholder="Ingresa el salario" v-model="newDataEmployee.salary">
+              id="grid-first-name" type="text" placeholder="Ingresa el peso" v-model="newDataEmployee.weight">
             <p v-for="error in errors" class="text-red-500 text-xs italic">{{ error }}</p>
           </div>
         </validation-provider>
+
+        <validation-provider name="height" rules="required" v-slot="{ invalid, errors, validated }">
+          <div class="w-full px-3 mb-6 md:mb-0">
+            <label class="block tracking-wide text-gray-700 text-xg mb-2" for="grid-first-name">
+              Altura <span class="text-red-500">*</span>
+            </label>
+            <input v-bind:class="{ 'border-red-500': validated && invalid }" name="height"
+              class="appearance-none block w-full bg-white-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              id="grid-first-name" type="number" placeholder="Ingresa el altura" v-model="newDataEmployee.height">
+            <p v-for="error in errors" class="text-red-500 text-xs italic">{{ error }}</p>
+          </div>
+        </validation-provider>
+
       </div>
       <div class="flex justify-center gap-2">
         <button
@@ -128,7 +142,7 @@ export default {
 
   data() {
     return {
-      newDataEmployee: { name: '', firstLastname: '', secondLastname: '', age: '', salary: '' },
+      newDataEmployee: { firstName: '', lastName: '', maidenName: '', age: '', weight: '', height: '' },
       errors: [],
       name: ''
     }
@@ -138,8 +152,8 @@ export default {
     getFormData(ev) {
       const newEmployee = Object.fromEntries(new FormData(ev.target).entries())
       console.log(newEmployee, new FormData(ev.target))
-      if (newEmployee?.name?.length > 0 && newEmployee?.firstLastname?.length > 0 && newEmployee?.secondLastname?.length > 0 && newEmployee?.age?.length > 0 && newEmployee?.salary?.length > 0) {
-        this.$emit('newEmployee', { employee_name: `${newEmployee?.name} ${newEmployee?.firstLastname} ${newEmployee?.secondLastname}`, employee_age: newEmployee?.age, employee_salary: newEmployee?.salary })
+      if (newEmployee?.firstName?.length > 0 && newEmployee?.lastName?.length > 0 && newEmployee?.maidenName?.length > 0 && newEmployee?.age?.length > 0 && newEmployee?.weight?.length > 0 && newEmployee?.height?.length > 0) {
+        this.$emit('newEmployee', { firstName: newEmployee?.firstName, lastName: newEmployee?.lastName, maidenName: newEmployee?.maidenName, age: newEmployee?.age, weight: newEmployee?.weight, height: newEmployee?.height })
       }
       if (newEmployee?.name?.trim() === "") {
         this.errors.push({ name: { message: "Ingresar nombre" } })
@@ -153,8 +167,11 @@ export default {
       if (newEmployee?.age?.trim() === "") {
         this.errors.push("Ingresar edad")
       }
-      if (newEmployee?.salary?.trim() === "") {
-        this.errors.push("Ingresar salario")
+      if (newEmployee?.weight?.trim() === "") {
+        this.errors.push("Ingresar peso")
+      }
+      if (newEmployee?.height?.trim() === "") {
+        this.errors.push("Ingresar altura")
       }
     }
   }
