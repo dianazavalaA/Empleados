@@ -54,7 +54,10 @@
             </table>
         </div>
         <Modal :is-show="isShow">
-            <Form @close="closeModal" @newEmployee="getdata" />
+            <Form v-if="isShow" @close="closeModal" @newEmployee="getdata" />
+        </Modal>
+        <Modal :is-show="isShowMod">
+            <EditEmployees :employee="changeEmployee" v-if="isShowMod" />
         </Modal>
     </div>
 </template>
@@ -62,8 +65,7 @@
 <script>
 import Modal from './Modal.vue'
 import Form from './Form.vue'
-
-
+import EditEmployees from './EditEmployees.vue'
 
 export default {
     data() {
@@ -170,6 +172,6 @@ export default {
     mounted() {
         this.getEmployees()
     },
-    components: { Modal, Form }
+    components: { Modal, Form, Modal, EditEmployees }
 }
 </script>

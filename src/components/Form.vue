@@ -176,9 +176,5 @@ export default {
     }
   }
 }
-
-
-
-
 </script>
  

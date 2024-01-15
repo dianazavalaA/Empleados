@@ -1,7 +1,7 @@
 <template>
     <validation-observer v-slot="{ invalid }">
         <form class="w-full max-w-md" @submit.prevent="getFormData">
-            <span v-for="error in errors">{{ error }}</span>
+
             <div class="flex flex-col -mx-3 mb-6">
                 <div class="relative">
                     <h2 class="block tracking-wide text-gray-700 text-xl font-bold mb-6 px-3">Crear colaboradores</h2>
@@ -16,8 +16,8 @@
                         </label>
                         <input v-bind:class="{ 'border-red-500': validated && invalid }"
                             class="appearance-none block w-full bg-white-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                            name="name" id="grid-first-name" type="text" placeholder="Solo nombre(s)"
-                            :value="employee.name">
+                            name="firstName" id="grid-first-name" type="text" placeholder="Solo nombre(s)"
+                            v-model="newEditDataEmployee.firstName">
                         <p v-for="error in errors" class="text-red-500 text-xs italic">{{ error }}</p>
                     </div>
                 </validation-provider>
@@ -27,10 +27,10 @@
                         <label class="block tracking-wide text-gray-700 text-xg mb-2" for="grid-first-name">
                             Apellido paterno <span class="text-red-500">*</span>
                         </label>
-                        <input v-bind:class="{ 'border-red-500': validated && invalid }" name="firstLastname"
+                        <input v-bind:class="{ 'border-red-500': validated && invalid }" name="lastName"
                             class="appearance-none block w-full bg-white-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                             id="grid-first-name" type="text" placeholder="Ingresa el primer apellido"
-                            :value="employee.firstLastname">
+                            v-model="newEditDataEmployee.lastName">
                         <p v-for="error in errors" class="text-red-500 text-xg italic">{{ error }}</p>
                     </div>
                 </validation-provider>
@@ -41,10 +41,10 @@
                         <label class="block tracking-wide text-gray-700 text-xg mb-2" for="grid-first-name">
                             Apellido materno <span class="text-red-500">*</span>
                         </label>
-                        <input v-bind:class="{ 'border-red-500': validated && invalid }" name="secondLastname"
+                        <input v-bind:class="{ 'border-red-500': validated && invalid }" name="maidenName"
                             class="appearance-none block w-full bg-white-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                             id="grid-first-name" type="text" min="18" placeholder="Ingresa segundo apellido"
-                            :value="employee.secondLastname">
+                            v-model="newEditDataEmployee.maidenName">
                         <p v-for="error in errors" class="text-red-500 text-xs italic">{{ error }}</p>
                     </div>
                 </validation-provider>
@@ -57,22 +57,38 @@
                         </label>
                         <input v-bind:class="{ 'border-red-500': visited && invalid }" name="age"
                             class="appearance-none block w-full bg-white-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                            id="grid-first-name" type="number" placeholder="Ingresa la edad" :value="employee.age">
+                            id="grid-first-name" type="number" placeholder="Ingresa la edad"
+                            v-model="newEditDataEmployee.age">
                         <p v-for="error in errors" class="text-red-500 text-xs italic">{{ error }}</p>
                     </div>
                 </validation-provider>
 
-                <validation-provider name="salary" rules="required" v-slot="{ invalid, errors, validated }">
+                <validation-provider name="weight" rules="required" v-slot="{ invalid, errors, validated }">
                     <div class="w-full px-3 mb-6 md:mb-0">
                         <label class="block tracking-wide text-gray-700 text-xg mb-2" for="grid-first-name">
-                            Salario <span class="text-red-500">*</span>
+                            Peso <span class="text-red-500">*</span>
                         </label>
-                        <input v-bind:class="{ 'border-red-500': validated && invalid }" name="salary"
+                        <input v-bind:class="{ 'border-red-500': validated && invalid }" name="weight"
                             class="appearance-none block w-full bg-white-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                            id="grid-first-name" type="number" placeholder="Ingresa el salario" :value="employee.salary">
+                            id="grid-first-name" type="text" placeholder="Ingresa el peso"
+                            v-model="newEditDataEmployee.weight">
                         <p v-for="error in errors" class="text-red-500 text-xs italic">{{ error }}</p>
                     </div>
                 </validation-provider>
+
+                <validation-provider name="height" rules="required" v-slot="{ invalid, errors, validated }">
+                    <div class="w-full px-3 mb-6 md:mb-0">
+                        <label class="block tracking-wide text-gray-700 text-xg mb-2" for="grid-first-name">
+                            Altura <span class="text-red-500">*</span>
+                        </label>
+                        <input v-bind:class="{ 'border-red-500': validated && invalid }" name="height"
+                            class="appearance-none block w-full bg-white-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            id="grid-first-name" type="number" placeholder="Ingresa el altura"
+                            v-model="newEditDataEmployee.height">
+                        <p v-for="error in errors" class="text-red-500 text-xs italic">{{ error }}</p>
+                    </div>
+                </validation-provider>
+
             </div>
             <div class="flex justify-center gap-2">
                 <button
@@ -87,8 +103,16 @@
 </template>
 
 <script>
+import { ValidationProvider, ValidationObserver } from 'vee-validate';
 
 export default {
-    props: ['employee']
+    data() {
+        return {
+            newEditDataEmployee: this.employee
+        }
+
+    },
+    props: ['employee'],
+    components: { ValidationProvider, ValidationObserver }
 }
 </script>
