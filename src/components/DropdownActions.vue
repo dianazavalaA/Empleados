@@ -1,12 +1,12 @@
 <template>
     <div>
-        <button class="relative" :displayActions=@click = "true">
+        <button class="relative" @click="displayActions = true">
             <img src="/assets/dots.svg" alt="dots" />
         </button>
-        <div class="absolute">
-            <ul>
-                <li> Editar </li>
-                <li> Eliminar </li>
+        <div class="absolute p-2 shadow border none" :class="{ flex: displayActions === true }">
+            <ul class="space-y-2">
+                <li @click="edit"> Editar </li>
+                <li @click="deleteUser"> Eliminar </li>
             </ul>
         </div>
     </div>
@@ -18,6 +18,17 @@ export default {
         return {
             displayActions: false
         }
-    }
+    },
+    methods: {
+        edit() {
+            displayActions: false,
+                this.$emit("edit", this.id)
+        },
+        deleteUser() {
+            displayActions: false,
+                this.$emit("delete", this.id)
+        }
+    },
+    props: ['id']
 }
 </script>

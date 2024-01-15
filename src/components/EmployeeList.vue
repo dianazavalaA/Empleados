@@ -47,7 +47,8 @@
                         <td class="px-4 w-48">{{ employee.age }}</td>
                         <td class="px-4 w-48">{{ employee.weight }}</td>
                         <td class="px-4 w-48">{{ employee.height }}</td>
-                        <td class="px-2 w-10 text-center py-2"><button><img src="/assets/dots.svg" alt="dots" /></button>
+                        <td class="px-2 w-10 text-center py-2">
+                            <DropdownActions :id="employee.id" />
                         </td>
                     </tr>
                 </tbody>
@@ -66,6 +67,7 @@
 import Modal from './Modal.vue'
 import Form from './Form.vue'
 import EditEmployees from './EditEmployees.vue'
+import DropdownActions from './DropdownActions.vue'
 
 export default {
     data() {
@@ -172,6 +174,6 @@ export default {
     mounted() {
         this.getEmployees()
     },
-    components: { Modal, Form, Modal, EditEmployees }
+    components: { Modal, Form, Modal, EditEmployees, DropdownActions }
 }
 </script>
