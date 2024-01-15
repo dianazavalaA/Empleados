@@ -1,6 +1,6 @@
 <template>
     <div class="relative">
-        <button class="relative" @click="displayActions = !displayActions" @blur="displayActions = false">
+        <button class="relative" @click="displayActions = !displayActions">
             <img src="/assets/dots.svg" alt="dots" />
         </button>
         <div class="absolute p-2 shadow border bg-white right-0 z-10"
@@ -22,12 +22,12 @@ export default {
     },
     methods: {
         edit() {
-            displayActions: false,
-                this.$emit("edit", this.id)
+            this.displayActions = false;
+            this.$emit("edit", this.id)
         },
         deleteUser() {
-            displayActions: false,
-                this.$emit("delete", this.id)
+            this.displayActions = false;
+            this.$emit("delete", this.id)
         }
     },
     props: ['id']
