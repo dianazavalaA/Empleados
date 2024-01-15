@@ -23,15 +23,15 @@
                         <th scope="col" class="bg-no-repeat bg-right p-4 bg-origin-content"><span>Nombre</span>
                         </th>
                         <th scope="col" class="bg-no-repeat bg-right p-4 bg-origin-content w-48"
-                            style="background-image: url('/assets/filter.svg')" @click="order('employee_age')">
+                            style="background-image: url('/assets/filter.svg')" @click="order('age')">
                             <span>Edad</span>
                         </th>
                         <th scope="col" class="bg-no-repeat bg-right p-4 bg-origin-content w-48"
-                            style="background-image: url('/assets/filter.svg')" @click="order('employee_salary')">
+                            style="background-image: url('/assets/filter.svg')">
                             <span>Peso</span>
                         </th>
                         <th scope="col" class="bg-no-repeat bg-right p-4 bg-origin-content w-48"
-                            style="background-image: url('/assets/filter.svg')" @click="order('employee_salary')">
+                            style="background-image: url('/assets/filter.svg')" @click="order('height')">
                             <span>Altura</span>
                         </th>
                     </tr>
@@ -63,6 +63,8 @@
 import Modal from './Modal.vue'
 import Form from './Form.vue'
 
+
+
 export default {
     data() {
         return {
@@ -77,12 +79,16 @@ export default {
         }
     },
     methods: {
-        getEmployees() {
+        getEmployees(fn) {
             fetch('https://dummyjson.com/users')
                 .then(response => response.json())
                 .then(data => {
                     this.employees = data.users
+                    console.log(typeof fn)
                     console.log(data)
+                    if (typeof fn === 'function') {
+                        fn()
+                    }
                 })
         },
         showModal() {
@@ -96,17 +102,18 @@ export default {
         },
         getdata(ev) {
             console.log(ev);
-            this.employees.push(ev)
+            let newEmployee = this.addEmployee(ev)
+
             this.isShow = false
         },
         order(type) {
             console.log(this.sortBy);
-            if (type === "employee_salary") {
-                this.sortBy.by = "employee_salary"
+            if (type === "age") {
+                this.sortBy.by = "age"
                 this.sortBy.option = this.sortBy.option === "asc" ? "desc" : "asc"
             }
-            if (type === "employee_age") {
-                this.sortBy.by = "employee_age"
+            if (type === "height") {
+                this.sortBy.by = "height"
                 this.sortBy.option = this.sortBy.option === "asc" ? "desc" : "asc"
             }
         }, remove(id) {
@@ -116,8 +123,21 @@ export default {
         editEmployee(id) {
             this.changeEmployee = this.employees.find(emp => emp.id === id)
             this.isShowMod = true
-
-
+        },
+        addEmployee(newEmployee) {
+            const requestOption = {
+                body: JSON.stringify(newEmployee),
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            }
+            fetch('https://dummyjson.com/users/add', requestOption)
+                .then(res => res.json())
+                .then((data) => {
+                    this.getEmployees(() => { this.employees.push(data) })
+                    console.log(data)
+                    this.$toast.open('Haz sido registrado con éxito')
+                    return data
+                })
         }
     },
     computed: {
@@ -129,12 +149,12 @@ export default {
             if (this.sortBy.by === "employee_salary" && this.sortBy.option === "desc") {
                 return this.busquedaPorNombre.sort((a, b) => b.employee_salary - a.employee_salary)
             }
-            if (this.sortBy.by === "employee_age" && this.sortBy.option === "desc") {
-                return this.busquedaPorNombre.sort((a, b) => a.employee_age - b.employee_age)
+            if (this.sortBy.by === "age" && this.sortBy.option === "desc") {
+                return this.busquedaPorNombre.sort((a, b) => a.age - b.age)
             }
 
-            if (this.sortBy.by === "employee_age" && this.sortBy.option === "asc") {
-                return this.busquedaPorNombre.sort((a, b) => b.employee_age - a.employee_age)
+            if (this.sortBy.by === "age" && this.sortBy.option === "asc") {
+                return this.busquedaPorNombre.sort((a, b) => b.age - a.age)
             }
 
             return this.busquedaPorNombre
@@ -144,7 +164,7 @@ export default {
             if (this.search === '') {
                 return this.employees
             }
-            return this.employees.filter(emp => emp.employee_name.toLowerCase().includes(this.search.toLowerCase()))
+            return this.employees.filter(emp => emp.firstName.toLowerCase().includes(this.search.toLowerCase()))
         }
     },
     mounted() {

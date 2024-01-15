@@ -12,7 +12,9 @@
                 <router-view></router-view>
             </div>
         </div>
-
+        <Modal :is-show="true">
+            <EditEmployees />
+        </Modal>
     </div>
 </template>
 
