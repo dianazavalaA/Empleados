@@ -4,7 +4,7 @@
 
             <div class="flex flex-col -mx-3 mb-6">
                 <div class="relative">
-                    <h2 class="block tracking-wide text-gray-700 text-xl font-bold mb-6 px-3">Crear colaboradores</h2>
+                    <h2 class="block tracking-wide text-gray-700 text-xl font-bold mb-6 px-3">Editar colaborador</h2>
                     <button class="absolute right-0 top-0" @click='$emit("close")' type="button"><img
                             src="/assets/closeSmall.svg" /></button>
                 </div>
@@ -96,7 +96,7 @@
                     @click='$emit("close")' type="button">Cancelar</button>
                 <button :class="{ 'cursor-not-allowed opacity-75': invalid }"
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
-                    type="submit">Crear colaborador</button>
+                    type="submit">Guardar cambios</button>
             </div>
         </form>
     </validation-observer>
