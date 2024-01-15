@@ -1,9 +1,10 @@
 <template>
-    <div>
+    <div class="relative">
         <button class="relative" @click="displayActions = !displayActions">
             <img src="/assets/dots.svg" alt="dots" />
         </button>
-        <div class="absolute p-2 shadow border bg-white right-0" :class="{ flex: displayActions, hidden: !displayActions }">
+        <div class="absolute p-2 shadow border bg-white right-0 z-10"
+            :class="{ flex: displayActions, hidden: !displayActions }">
             <ul class="space-y-2">
                 <li @click="edit"> Editar </li>
                 <li @click="deleteUser"> Eliminar </li>
