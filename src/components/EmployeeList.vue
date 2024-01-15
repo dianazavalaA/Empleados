@@ -48,7 +48,7 @@
                         <td class="px-4 w-48">{{ employee.weight }}</td>
                         <td class="px-4 w-48">{{ employee.height }}</td>
                         <td class="px-2 w-10 text-center py-2">
-                            <DropdownActions :id="employee.id" />
+                            <DropdownActions :id="employee.id" @edit="editEmployee" />
                         </td>
                     </tr>
                 </tbody>
