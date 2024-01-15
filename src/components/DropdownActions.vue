@@ -1,6 +1,6 @@
 <template>
     <div class="relative">
-        <button class="relative" @click="displayActions = !displayActions">
+        <button class="relative" @click="displayActions = !displayActions" @blur="displayActions = false">
             <img src="/assets/dots.svg" alt="dots" />
         </button>
         <div class="absolute p-2 shadow border bg-white right-0 z-10"
