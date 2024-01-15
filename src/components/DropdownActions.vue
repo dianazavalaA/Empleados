@@ -3,7 +3,7 @@
         <button class="relative" @click="displayActions = true">
             <img src="/assets/dots.svg" alt="dots" />
         </button>
-        <div class="absolute p-2 shadow border none" :class="{ flex: displayActions === true }">
+        <div class="absolute p-2 shadow border hidden" :class="{ flex: displayActions, hidden: !displayActions }">
             <ul class="space-y-2">
                 <li @click="edit"> Editar </li>
                 <li @click="deleteUser"> Eliminar </li>
