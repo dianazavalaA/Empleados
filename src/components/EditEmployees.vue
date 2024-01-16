@@ -113,6 +113,9 @@ export default {
     },
     methods: {
         changeEditData(ev) {
+            const newEmployee = Object.fromEntries(new FormData(ev.target).entries())
+            console.log(newEmployee)
+            this.$emit('editEmployee', { firstName: newEmployee?.firstName, lastName: newEmployee?.lastName, maidenName: newEmployee?.maidenName, age: newEmployee?.age, weight: newEmployee?.weight, height: newEmployee?.height })
             console.log(ev)
         }
     },
