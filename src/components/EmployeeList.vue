@@ -48,7 +48,7 @@
                         <td class="px-4 w-48">{{ employee.weight }}</td>
                         <td class="px-4 w-48">{{ employee.height }}</td>
                         <td class="px-2 w-10 text-center py-2">
-                            <DropdownActions :id="employee.id" @edit="editEmployee" />
+                            <DropdownActions :id="employee.id" @edit="editEmployee" @delete="removeEmployee" />
                         </td>
                     </tr>
                 </tbody>
@@ -58,7 +58,13 @@
             <Form v-if="isShow" @close="closeModal" @newEmployee="getdata" />
         </Modal>
         <Modal :is-show="isShowMod">
-            <EditEmployees :employee="changeEmployee" v-if="isShowMod" @close="closeModalEdit" />
+            <EditEmployees :employee="changeEmployee" v-if="isShowMod" @close="closeModalEdit"
+                @editEmployee="updateEmployee" />
+        </Modal>
+        <Modal :is-show="isShowModDelete">
+            <div>
+                <DeleteEmployees :employee="deleteEmployee" @close="isShowModDelete = false" @delete="" />
+            </div>
         </Modal>
     </div>
 </template>
@@ -68,6 +74,7 @@ import Modal from './Modal.vue'
 import Form from './Form.vue'
 import EditEmployees from './EditEmployees.vue'
 import DropdownActions from './DropdownActions.vue'
+import DeleteEmployees from './DeleteEmployees.vue'
 
 export default {
     data() {
@@ -79,7 +86,9 @@ export default {
             search: "",
             errors: [],
             changeEmployee: [],
-            isShowMod: false
+            isShowMod: false,
+            deleteEmployee: [],
+            isShowModDelete: false
         }
     },
     methods: {
@@ -128,6 +137,10 @@ export default {
             this.changeEmployee = this.employees.find(emp => emp.id === id)
             this.isShowMod = true
         },
+        removeEmployee(id) {
+            this.deleteEmployee = this.employees.find(emp => emp.id === id)
+            this.isShowModDelete = true
+        },
         addEmployee(newEmployee) {
             const requestOption = {
                 body: JSON.stringify(newEmployee),
@@ -146,14 +159,33 @@ export default {
         closeModalEdit() {
             this.isShowMod = false;
         },
-        updateEmployee(employee) {
+        updateEmployee(newEmployee) {
             const requestUpdate = {
                 body: JSON.stringify(newEmployee),
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' }
             }
-            fetch(`https://dummyjson.com/users/${id}`)
+            fetch(`https://dummyjson.com/users/${this.changeEmployee.id}`, requestUpdate)
                 .then(res => res.json())
+                .then(data => {
+                    this.getEmployees(() => { this.employees.push(data) })
+                    console.log(data)
+                    this.$toast.open('El colaborador ha sido actualizado con éxito')
+                    return data
+                })
+        },
+        deleteEmployee() {
+            const requestDelete = {
+                method: 'DELETE'
+            }
+            fetch('https://dummyjson.com/users/1', requestDelete)
+                .then(res => res.json())
+                .then(data => {
+                    this.getEmployees(() => { this.employees.push(data) })
+                    console.log(data)
+                    this.$toast.open('El colaborador ha sido eliminado con éxito')
+                    return data
+                })
         }
     },
     computed: {
@@ -186,6 +218,6 @@ export default {
     mounted() {
         this.getEmployees()
     },
-    components: { Modal, Form, Modal, EditEmployees, DropdownActions }
+    components: { Modal, Form, Modal, EditEmployees, DropdownActions, DeleteEmployees }
 }
 </script>
