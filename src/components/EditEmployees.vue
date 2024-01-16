@@ -1,7 +1,6 @@
 <template>
     <validation-observer v-slot="{ invalid }">
-        <form class="w-full max-w-md" @submit.prevent="getFormData">
-
+        <form class="w-full max-w-md" @submit.prevent="changeEditData">
             <div class="flex flex-col -mx-3 mb-6">
                 <div class="relative">
                     <h2 class="block tracking-wide text-gray-700 text-xl font-bold mb-6 px-3">Editar colaborador</h2>
@@ -111,6 +110,11 @@ export default {
             newEditDataEmployee: this.employee
         }
 
+    },
+    methods: {
+        changeEditData(ev) {
+            console.log(ev)
+        }
     },
     props: ['employee'],
     components: { ValidationProvider, ValidationObserver }
