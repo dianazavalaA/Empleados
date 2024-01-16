@@ -58,7 +58,7 @@
             <Form v-if="isShow" @close="closeModal" @newEmployee="getdata" />
         </Modal>
         <Modal :is-show="isShowMod">
-            <EditEmployees :employee="changeEmployee" v-if="isShowMod" />
+            <EditEmployees :employee="changeEmployee" v-if="isShowMod" @close="closeModalEdit" />
         </Modal>
     </div>
 </template>
@@ -142,6 +142,18 @@ export default {
                     this.$toast.open('Haz sido registrado con éxito')
                     return data
                 })
+        },
+        closeModalEdit() {
+            this.isShowMod = false;
+        },
+        updateEmployee(employee) {
+            const requestUpdate = {
+                body: JSON.stringify(newEmployee),
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' }
+            }
+            fetch(`https://dummyjson.com/users/${id}`)
+                .then(res => res.json())
         }
     },
     computed: {
