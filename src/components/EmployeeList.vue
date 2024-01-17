@@ -54,6 +54,9 @@
                 </tbody>
             </table>
         </div>
+        <paginate :page-count="totalPagination">
+
+        </paginate>
         <Modal :is-show="isShow">
             <Form v-if="isShow" @close="closeModal" @newEmployee="getdata" />
         </Modal>
@@ -63,7 +66,7 @@
         </Modal>
         <Modal :is-show="isShowModDelete">
             <div>
-                <DeleteEmployees :employee="deleteEmployee" @close="isShowModDelete = false" @delete="" />
+                <DeleteEmployees :employee="deleteEmployee" @close="isShowModDelete = false" @delete="deleEmployee" />
             </div>
         </Modal>
     </div>
@@ -88,12 +91,16 @@ export default {
             changeEmployee: [],
             isShowMod: false,
             deleteEmployee: [],
-            isShowModDelete: false
+            isShowModDelete: false,
+            currentPage: 1,
+            perPage: 20,
+            totalElements: 0,
+            totalPages: 0
         }
     },
     methods: {
-        getEmployees(fn) {
-            fetch('https://dummyjson.com/users')
+        getEmployees(fn, skip) {
+            fetch('https://dummyjson.com/users' + "?limit=" + this.perPage + "&skip=" + skip)
                 .then(response => response.json())
                 .then(data => {
                     this.employees = data.users
@@ -174,19 +181,32 @@ export default {
                     return data
                 })
         },
-        deleteEmployee() {
+        deleEmployee() {
             const requestDelete = {
                 method: 'DELETE'
             }
-            fetch('https://dummyjson.com/users/1', requestDelete)
+            fetch('https://dummyjson.com/users/' + this.deleteEmployee.id, requestDelete)
                 .then(res => res.json())
                 .then(data => {
-                    this.getEmployees(() => { this.employees.push(data) })
+                    this.employees = this.employees.filter(emp => emp.id != this.deleteEmployee.id)
+                    this.isShowModDelete = false
                     console.log(data)
                     this.$toast.open('El colaborador ha sido eliminado con éxito')
                     return data
                 })
+        },
+        paginationEmployee(nextpage) {
+            const itemsSkip = (this.perPage * (nextpage - 1))
+            fetch(`https://dummyjson.com/users` + "?limit=" + this.perPage + "&skip=" + itemsSkip)
+                .then(res => res.json())
+
+        },
+        changePage(page) {
+            const skip = (this.perPage * (page - 1))
+            this.getEmployees(undefined, skip)
+
         }
+
     },
     computed: {
         orderBy() {
@@ -213,6 +233,10 @@ export default {
                 return this.employees
             }
             return this.employees.filter(emp => emp.firstName.toLowerCase().includes(this.search.toLowerCase()))
+        },
+        totalPagination() {
+            return Math.ceil(this.totalElements / this.perPage);
+
         }
     },
     mounted() {
