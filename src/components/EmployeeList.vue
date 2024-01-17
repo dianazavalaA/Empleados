@@ -54,7 +54,11 @@
                 </tbody>
             </table>
         </div>
-        <paginate :page-count="totalPagination">
+        <paginate container-class="inline-flex justify-center"
+            page-link-class="flex items-center justify-center px-3 h-8 leading-tight text-blue-500 bg-white border border-blue-300 hover:bg-blue-100 hover:text-blue-700"
+            prev-class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-blue-500 bg-white border border-e-0 border-blue-300 rounded-s-lg hover:bg-blue-100 hover:text-blue-700"
+            next-class="flex items-center justify-center px-4 h-8 leading-tight text-blue-500 bg-white border border-blue-300 rounded-e-lg hover:bg-blue-100 hover:text-blue-700"
+            :page-count="totalPagination" :click-handler="changePage">
 
         </paginate>
         <Modal :is-show="isShow">
@@ -100,10 +104,11 @@ export default {
     },
     methods: {
         getEmployees(fn, skip) {
-            fetch('https://dummyjson.com/users' + "?limit=" + this.perPage + "&skip=" + skip)
+            fetch(`https://dummyjson.com/users?limit=${this.perPage}${skip !== undefined ? '&skip=' + skip : ''}`)
                 .then(response => response.json())
                 .then(data => {
                     this.employees = data.users
+                    this.totalElements = data.total;
                     console.log(typeof fn)
                     console.log(data)
                     if (typeof fn === 'function') {
