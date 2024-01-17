@@ -54,7 +54,7 @@
                 </tbody>
             </table>
         </div>
-        <paginate container-class="inline-flex justify-center"
+        <paginate container-class="inline-flex justify-center w-full my-6"
             page-link-class="flex items-center justify-center px-3 h-8 border border-blue-300"
             prev-class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-blue-500 bg-white border border-e-0 border-blue-300 rounded-s-lg hover:bg-blue-100 hover:text-blue-700"
             next-class="flex items-center justify-center px-4 h-8 leading-tight text-blue-500 bg-white border border-blue-300 rounded-e-lg hover:bg-blue-100 hover:text-blue-700"
