@@ -47,7 +47,7 @@
                         <td class="px-4 w-48">{{ employee.age }}</td>
                         <td class="px-4 w-48">{{ employee.weight }}</td>
                         <td class="px-4 w-48">{{ employee.height }}</td>
-                        <td class="px-2 w-10 text-center py-2">
+                        <td class="px-2 w-10 text-center py-2 cursor-pointer">
                             <DropdownActions :id="employee.id" @edit="editEmployee" @delete="removeEmployee" />
                         </td>
                     </tr>
@@ -55,10 +55,11 @@
             </table>
         </div>
         <paginate container-class="inline-flex justify-center"
-            page-link-class="flex items-center justify-center px-3 h-8 leading-tight text-blue-500 bg-white border border-blue-300 hover:bg-blue-100 hover:text-blue-700"
+            page-link-class="flex items-center justify-center px-3 h-8 border border-blue-300"
             prev-class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-blue-500 bg-white border border-e-0 border-blue-300 rounded-s-lg hover:bg-blue-100 hover:text-blue-700"
             next-class="flex items-center justify-center px-4 h-8 leading-tight text-blue-500 bg-white border border-blue-300 rounded-e-lg hover:bg-blue-100 hover:text-blue-700"
-            :page-count="totalPagination" :click-handler="changePage">
+            page-class="text-blue-500 bg-white leading-tight  hover:bg-blue-100 hover:text-blue-700"
+            active-class="bg-blue-100" :page-count="totalPagination" :click-handler="changePage">
 
         </paginate>
         <Modal :is-show="isShow">
