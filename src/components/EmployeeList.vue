@@ -1,12 +1,12 @@
 <template>
     <div>
-        <div class="my-8 flex itms-center justify-between">
+        <div class="my-8 flex itms-center justify-between flex-col md:flex-row gap-4">
             <div class="relative">
                 <div class="absolute inset-y-0 flex items-center pl-3 pointer-events-none">
                     <img src="/assets/search.svg">
                 </div>
                 <input
-                    class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-no-repeat bg-left bg-origin-content pl-10"
+                    class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-no-repeat bg-left bg-origin-content pl-10 w-full md:max-w-60"
                     id="Search" type="text" v-model="search" placeholder="Buscar por nombre">
             </div>
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
@@ -15,22 +15,27 @@
 
         <div class="border ring-1 ring-opacity-75 ring-gray-400 rounded-xl overflow-hidden">
             <table class="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto">
-                <thead class="text-gray-700o dark:bg-gray-700 dark:text-gray-400">
+                <thead class="text-gray-700o dark:bg-gray-700 dark:text-gray-400 text-sm md:text-base">
                     <tr class="border-b-2 border-gray-300 pb-2 mb-2 max-width">
                         <th class="px-2 w-10 text-center" scope="col"><input id="checkbox" type="checkbox"
                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         </th>
-                        <th scope="col" class="bg-no-repeat bg-right p-4 bg-origin-content"><span>Nombre</span>
+                        <th scope="col"
+                            class="bg-no-repeat md:p-4 bg-bottom md:bg-right pb-4 h-20 md:h-auto bg-origin-content">
+                            <span>Nombre</span>
                         </th>
-                        <th scope="col" class="bg-no-repeat bg-right p-4 bg-origin-content w-48"
+                        <th scope="col"
+                            class="bg-no-repeat md:p-4 bg-bottom md:bg-right pb-4 h-20 md:w-48 px-2 md:h-auto bg-origin-content"
                             style="background-image: url('/assets/filter.svg')" @click="order('age')">
                             <span>Edad</span>
                         </th>
-                        <th scope="col" class="bg-no-repeat bg-right p-4 bg-origin-content w-48"
+                        <th scope="col"
+                            class="bg-no-repeat md:p-4 bg-bottom md:bg-right pb-4 h-20 md:w-48 px-2 md:h-auto bg-origin-content"
                             style="background-image: url('/assets/filter.svg')">
                             <span>Peso</span>
                         </th>
-                        <th scope="col" class="bg-no-repeat bg-right p-4 bg-origin-content w-48"
+                        <th scope="col"
+                            class="bg-no-repeat md:p-4 bg-bottom md:bg-right pb-4 h-20 md:w-48 px-2 md:h-auto bg-origin-content"
                             style="background-image: url('/assets/filter.svg')" @click="order('height')">
                             <span>Altura</span>
                         </th>
@@ -43,10 +48,12 @@
                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 pl-2">
                             <label for="checkbox" class="sr-only">checkbox</label>
                         </td>
-                        <td class="px-4">{{ employee.firstName }} {{ employee.lastName }} {{ employee.maidenName }}</td>
-                        <td class="px-4 w-48">{{ employee.age }}</td>
-                        <td class="px-4 w-48">{{ employee.weight }}</td>
-                        <td class="px-4 w-48">{{ employee.height }}</td>
+                        <td class="px-2  md:px-4 w-auto">{{ employee.firstName }} {{ employee.lastName }} {{
+                            employee.maidenName }}
+                        </td>
+                        <td class="px-2 md:px-4 md:w-48 w-auto">{{ employee.age }}</td>
+                        <td class="px-2 md:px-4 md:w-48 w-auto">{{ employee.weight }}</td>
+                        <td class="px-2 md:px-4 md:w-48 w-auto">{{ employee.height }}</td>
                         <td class="px-2 w-10 text-center py-2 cursor-pointer">
                             <DropdownActions :id="employee.id" @edit="editEmployee" @delete="removeEmployee" />
                         </td>
