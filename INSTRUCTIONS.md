@@ -17,11 +17,21 @@ En esta parte enlistaremos las tecnologías usadas para el desarrollo de la apli
 - [Vue-Router](https://v3.router.vuejs.org/ "Vue-Router"): Se hizó uso de esta biblioteca para poder asignar componentes de la aplicación a distintas URL, lo cual ayudo bastante a navegar en la misma y así obtener un resultado exitoso.
 - [Toast-Vue](https://www.npmjs.com/package/vue-toast-notification/v/1.0.1 "Toast-Vue"): Se hizo uso de este componente para manejar las notificaciones de manera emergente.
 - [Vuejs-paginate](https://www.npmjs.com/package/vuejs-paginate "Vuejs-paginate"): Se hizo uso de este componente que ayudo de una manera fácil a hacer la paginación.
-- [Template literals](Template literals "Template literals"): se hizo uso de esta documentación para el desarrollo de la aplicación ya que hay algunas partes donde ocupamos cadenas de varias lineas ya que se hizo uso de query params.
 - [API Dummy](https://dummyjson.com/docs/users "API Dummy"): Se utilizó esta API que como ya les comentaba al inicio, nos ayudo a poder realizar nuestro CRUD así se se logró que la comunicación entre la información y la aplicación fuera más completa, en la siguiente parte explicamos más a detalle su uso.
 - [Diseño Figma](https://www.figma.com/file/BO5iFAlfeairAaNOjZkwpI/Front-End-Test?type=design&node-id=0-1&mode=design&t=hIOHAIIZ1pbSN11w-0 "Diseño Figma"): Este es el diseño que se replicó y que se trato de hacer lo más parecido posible a lo que se presenta en Figma, al final se agregan imagenes de los resultados obtenidos y la explicación de cada uno.
 
-## Levantar el ambiente
+## Instalación y levantar el ambiente
+
+#### ¿Qué necesitamos instalar?
+
+Antes de poder levantar el ambiente para probar, se requiere lo siguiente:
+
+1. Se requiere tener **Node** y **npm** para poder correrlo, en caso de no tenerlo lo puedes descargar de la siguiente liga [Descargar Node Js](https://nodejs.org/en "Descargar Node Js")
+2. Ya una vez que se tiene completo el punto #1 entonces se tiene que instalar dependencias como:
+   `npm create vite@latest` Esta es para instalar la versión de vite
+   `npm install vue@^2` Esta es para instalar la versión de Vue 2
+
+#### Levantar el ambiente
 
 1. Para poder levantar el ambiente de inicio se debe clonar el repositorio por medio de SSH o por medio de HTTPS
 2. Ingresar al directorio del proyecto que ya se clono de la siguiente manera:
@@ -84,4 +94,4 @@ Otra cosa que se puede implementar de una manera también autodidacta y para dar
 
 ## ¿Qué aprendí?
 
-Utilicé muchas cosas que nunca había utilizado lo que hizo que fuera aun más retador poderlo llevar acabo, sin duda alguna se requiere un gran tiempo de concentración y más que nada investigar y volver a investigar, leer documentación y ver como implementarla, seguro algo no logrará adaptarse a la primera pero la mejor ayuda que se tiene es la documentación para poder entenderla, luego implementarla y adaptarla a lo que se necesita.
+Utilicé muchas cosas que nunca había utilizado, lo que hizo que fuera aun más retador poderlo llevar acabo, sin duda alguna se requiere un gran tiempo de concentración y más que nada investigar y volver a investigar, leer documentación y ver como implementarla, seguro algo no logrará adaptarse a la primera pero la mejor ayuda que se tiene es la documentación para poder entenderla, luego implementarla y adaptarla a lo que se necesita.
