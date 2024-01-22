@@ -1,4 +1,4 @@
-# Prueba Técnica - Ejercicio #2
+# Sistema de administración de empleados
 
 ## Objetivo
 
@@ -12,7 +12,7 @@ En esta parte enlistaremos las tecnologías usadas para el desarrollo de la apli
 
 - [Vue 2.x](https://v2.vuejs.org/v2/guide/ "Vue 2.x"): Este framework se utilizó para crear la estructura de toda la interfaz de la aplicación.
 - [Tailwind CSS](https://tailwindcss.com/ "Tailwind CSS"): Está tecnología se uso para poder darle estilos a toda la estructura del proyecto, lo que facilitó mucho el desarrollo.
-- [VeeValidate](https://vee-validate.logaretm.com/v3/ "VeeValidate"): Se hizo uso de esta plugin para poder validar la parte del formulario y los campos que tenemos, lo que nos hace un camino simple para lo que queremos lograr.
+- [VeeValidate](https://vee-validate.logaretm.com/v3/ "VeeValidate"): Se hizo uso de esta librería para poder validar la parte del formulario y los campos que tenemos, lo que nos hace un camino simple para lo que queremos lograr.
 - [Vite](https://vitejs.dev/ "Vite"): Está poderosa herramienta de front-end se hizo uso para poder crear la aplicación hombro a hombro junto con Vue 2.x y que su construcción pudiera ser lo más sencilla posible, además de que la respuesta del servidor va a ser más rápida, ya que logra dividir dependencia y código fuente.
 - [Vue-Router](https://v3.router.vuejs.org/ "Vue-Router"): Se hizó uso de esta biblioteca para poder asignar componentes de la aplicación a distintas URL, lo cual ayudo bastante a navegar en la misma y así obtener un resultado exitoso.
 - [Toast-Vue](https://www.npmjs.com/package/vue-toast-notification/v/1.0.1 "Toast-Vue"): Se hizo uso de este componente para manejar las notificaciones de manera emergente.
@@ -20,6 +20,14 @@ En esta parte enlistaremos las tecnologías usadas para el desarrollo de la apli
 - [Template literals](Template literals "Template literals"): se hizo uso de esta documentación para el desarrollo de la aplicación ya que hay algunas partes donde ocupamos cadenas de varias lineas ya que se hizo uso de query params.
 - [API Dummy](https://dummyjson.com/docs/users "API Dummy"): Se utilizó esta API que como ya les comentaba al inicio, nos ayudo a poder realizar nuestro CRUD así se se logró que la comunicación entre la información y la aplicación fuera más completa, en la siguiente parte explicamos más a detalle su uso.
 - [Diseño Figma](https://www.figma.com/file/BO5iFAlfeairAaNOjZkwpI/Front-End-Test?type=design&node-id=0-1&mode=design&t=hIOHAIIZ1pbSN11w-0 "Diseño Figma"): Este es el diseño que se replicó y que se trato de hacer lo más parecido posible a lo que se presenta en Figma, al final se agregan imagenes de los resultados obtenidos y la explicación de cada uno.
+
+## Levantar el ambiente
+
+1. Para poder levantar el ambiente de inicio se debe clonar el repositorio por medio de SSH o por medio de HTTPS
+2. Ingresar al directorio del proyecto que ya se clono de la siguiente manera:
+   `cd admin-employees`
+3. Ahora vamos a arrancar el proyecto con el siguiente comando:
+   `npm run dev`
 
 ## ¿Cómo es la API? y ¿Cómo se usa?
 
@@ -57,9 +65,23 @@ Como lo mencioné antes la API nos da todo en nuestras manos sólo es cuestión 
 
 #### ¿Cómo usar la API en nuestro proyecto?
 
-Para poder hacer uso de esta API se implemento en código **Fetch API con promises**, hay varias maneras de hacerlo, pero el uso de esta desde mi punto de vista me parece una sintaxis más limpia y más legible, ya que al escribir el código de está manera es fácil de entender para las personas que por primera vez echan un vistazo al código y otra cosa que también me parece buena para en un futuro darle escalabilidad a un sistema y que alguien más continue con ello **fetch** facilita mucho la parte de las respuestas, es decir, accedes más rápido sin tantos rodeos a la información de una API o hasta un JSON, los errores también son algo que maneja **fetch** bastante bien los errores hacer uso de **catch** nos hace más efectivo poder manejas los errores que se tengan y dar acciones rápidas.
-A continuación se muestra como se hizo uso de esta parte para poder construir la aplicación.
+Para poder hacer uso de esta API se implemento en código **Fetch API con promises**, hay varias maneras de hacerlo, pero el uso de esta desde mi punto de vista me parece una sintaxis más limpia y más legible, ya que al escribir el código de está manera es fácil de entender para las personas que por primera vez echan un vistazo al código y otra cosa que también me parece buena para en un futuro darle escalabilidad a un sistema y que alguien más continue con ello **fetch** facilita mucho la parte de las respuestas, es decir, accedes más rápido sin tantos rodeos a la información de una API o hasta un JSON, los errores también son algo que maneja **fetch** bastante bien al hacer uso de **catch** nos hace más efectivo poder manejas los errores que se tengan y dar acciones rápidas.
+En el componente **_EmployeeList.vue_** se crearon varios métodos, en el apartado de **_methods_** podemos encontrar todos y cada uno de ellos, mientrás se va a ir desglozando la información. En el primer método justamente es donde podemos obtener toda la lista de usuarios, usando fetch y promises, se toma completamente la URL y bien tenemos un **.then** en este caso maneja lo que es la respuesta de la solicitud y al final lo convierte en lo que es un formato **JSON** mientrás que **el segundo .then** va a encapsular nuestros datos resultantes
+![](https://github.com/dianazavalaA/Empleados/blob/master/AdminEmployeesImg/Fetch%20GET.png?raw=true)
 
-##### ¿Cómo se implemento Fetch API con promises?
+## Solución
 
-En el componente **_EmployeeList.vue_** se crearon varios métodos, en el apartado de **_methods_** podemos encontrar todos y cada uno de ellos, mientrás se va a ir desglozando la información por partes
+Bien para poder llevar acabo la construcción se tomo la [API Dummy](https://dummyjson.com/docs/users "API Dummy") donde primero que nada se mando llamar a esta para poder hacer uso para todo lo demás (ya se mencionó anteriormente como se uso) aquí se crearon varios componentes como el modal para poder mostrar el formulario para llenar la información solicitada, así como la parte de editar un usuario también se hizo uso del modal, adicional de que se implementaron **props** justamente para tener una comunicación unidireccional entre los componentes entre los que se usaron en el ejercicio se pueden ver en la parte de eliminar empleado(**DeleteEmployees**), justo para que en este componente se tenga comunicación de que tiene que arrojar una ventana que nos permita decidir si quiere eliminar o no al usuario, también se puede ver en la parte de la opciones como **Editar** y **Eliminar** esta utiliza dentro de la tabla para una sola comunicación entre el componente y que pueda abrirnos el modal para editar la información o bien para eliminarlo y se puede ver la implentación en **DropdownActions** la prop es* id* y usa de manera directa en la tabla para en **EmployeeList**.
+Se hizo uso totalmente de **Vue 2** y **Vue Router** para la construcción y navegación del sitio e incluso probé metiendo más herramientas para poder hacer más fácil la parte de las notificaciones con **Toast**, de hecho esta se puede ver en las notificaciones que salen cuando damos de alta un usuario, cuando se actualiza o bien cuando se elimina, bastante interesante el uso de esta para simplificar y hacer más rápido el uso de notificaciones nunca lo había implementado hasta ahora.
+Otra plugin que es la primera vez que uso es **VeeValidate** muy potente para simplificar las validaciones este justamente se puede ver en el formulario que se implemento para editar los usuarios, se uso **validation-observer** y **validation-provider**, el primero que es _observer_ es un componente que se encarga de encapsular todo el formulario y ayudar a gestionar el estado de validación de dicho formulario mientrás que _provider_ es un componente que igual se encarga de encapsular pero en esta caso los input para poder realizar las validaciones.
+**Tailwind CSS** fue el mejor aliado para la construcción del ejercicio, ya que con ayuda de este se le pudo dar todos los estilos necesarios e igualarlo a lo que se proporciono en el Figma y también con este mismo se le dieron los estilos a la paginación.
+Para poder solucionar la parte de páginación se hizo uso de **Vue-paginate** para poder implementarlo, usando su documentación facilito mucho lograr los resultados que se obtuvieron.
+
+## ¿Qué se puede mejorar?
+
+La parte de validaciones creo es una parte que puede mejorar aun más, se puede implementar alguna parte adicional para poder filtrar ya sea por Edad, Peso o Estatura, y creo que de igual manera sería bueno mejorar la interfaz pero aquí se trato de apegar lo más que se pudiera al diseño proporcionado.
+Otra cosa que se puede implementar de una manera también autodidacta y para darle un plus sería hacer uso de storybook para poder hacer testing visual.
+
+## ¿Qué aprendí?
+
+Utilicé muchas cosas que nunca había utilizado lo que hizo que fuera aun más retador poderlo llevar acabo, sin duda alguna se requiere un gran tiempo de concentración y más que nada investigar y volver a investigar, leer documentación y ver como implementarla, seguro algo no logrará adaptarse a la primera pero la mejor ayuda que se tiene es la documentación para poder entenderla, luego implementarla y adaptarla a lo que se necesita.
