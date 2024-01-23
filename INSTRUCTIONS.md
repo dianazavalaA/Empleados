@@ -27,16 +27,16 @@ En esta parte enlistaremos las tecnologías usadas para el desarrollo de la apli
 Antes de poder levantar el ambiente para probar, se requiere lo siguiente:
 
 1. Se requiere tener **Node** y **npm** para poder correrlo, en caso de no tenerlo lo puedes descargar de la siguiente liga [Descargar Node Js](https://nodejs.org/en "Descargar Node Js")
-2. Ya una vez que se tiene completo el punto #1 entonces se tiene que instalar dependencias como:
-   `npm create vite@latest` Esta es para instalar la versión de vite
-   `npm install vue@^2` Esta es para instalar la versión de Vue 2
+2. Ya una vez que se tiene completo el punto #1 entonces se tiene que instalar dependencias del proyecto
 
 #### Levantar el ambiente
 
 1. Para poder levantar el ambiente de inicio se debe clonar el repositorio por medio de SSH o por medio de HTTPS
 2. Ingresar al directorio del proyecto que ya se clono de la siguiente manera:
    `cd admin-employees`
-3. Ahora vamos a arrancar el proyecto con el siguiente comando:
+3. Después de ingresar al directorio vamos a agregar las dependencias con el siguiente comando
+   `npm install`
+4. Ahora vamos a arrancar el proyecto con el siguiente comando:
    `npm run dev`
 
 ## ¿Cómo es la API? y ¿Cómo se usa?
