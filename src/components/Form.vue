@@ -2,7 +2,7 @@
   <validation-observer v-slot="{ invalid }">
     <form class="w-full max-w-md" @submit.prevent="getFormData">
       <span v-for="error in errors">{{ error }}</span>
-      <div class="flex flex-col -mx-3 mb-6">
+      <div class="flex flex-col -mx-3 mb-0">
         <div class="relative">
           <h2 class="block tracking-wide text-gray-700 text-xl font-bold mb-6 px-3">Crear colaboradores</h2>
           <button class="absolute right-0 top-0" @click='$emit("close")' type="button"><img
