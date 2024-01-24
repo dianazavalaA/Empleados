@@ -13,7 +13,7 @@
                 @click="showModal">Crear colaborador</button>
         </div>
 
-        <div class="border ring-1 ring-opacity-75 ring-gray-400 rounded-xl overflow-hidden">
+        <div class="border ring-6 ring-opacity-75 ring-gray-400 rounded-xl">
             <table class="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto">
                 <thead class="text-gray-700o dark:bg-gray-700 dark:text-gray-400 text-sm md:text-base">
                     <tr class="border-b-2 border-gray-300 pb-2 mb-2 max-width">
@@ -223,13 +223,6 @@ export default {
     },
     computed: {
         orderBy() {
-            if (this.sortBy.by === "employee_salary" && this.sortBy.option === "asc") {
-                return this.busquedaPorNombre.sort((a, b) => a.employee_salary - b.employee_salary)
-            }
-
-            if (this.sortBy.by === "employee_salary" && this.sortBy.option === "desc") {
-                return this.busquedaPorNombre.sort((a, b) => b.employee_salary - a.employee_salary)
-            }
             if (this.sortBy.by === "age" && this.sortBy.option === "desc") {
                 return this.busquedaPorNombre.sort((a, b) => a.age - b.age)
             }
